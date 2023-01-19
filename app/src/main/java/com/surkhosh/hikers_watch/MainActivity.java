@@ -9,12 +9,17 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,5 +70,40 @@ public class MainActivity extends AppCompatActivity {
         TextView accTextView = findViewById(R.id.accTextView);
         TextView altTextView = findViewById(R.id.altTextView);
         TextView addTextView = findViewById(R.id.addTextView);
+
+        latTextView.setText("Latitude: " + Double.toString(location.getLatitude()));
+        lonTextView.setText("Longitude: " + Double.toString(location.getLongitude()));
+        accTextView.setText("Accuracy: " + Double.toString(location.getAccuracy()));
+        altTextView.setText("Altitude: " + Double.toString(location.getAltitude()));
+
+        String address = "Could not find address..";
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> listAddress = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+            if (listAddress != null && listAddress.size() > 0) {
+                address = "Address:\n";
+
+                if (listAddress.get(0).getThoroughfare() != null) {
+                    address += listAddress.get(0).getThoroughfare() + "\n";
+                }
+
+                if (listAddress.get(0).getLocality() != null) {
+                    address += listAddress.get(0).getLocality() + " ";
+                }
+
+                if (listAddress.get(0).getPostalCode() != null) {
+                    address += listAddress.get(0).getPostalCode() + " ";
+                }
+
+                if (listAddress.get(0).getAdminArea() != null) {
+                    address += listAddress.get(0).getAdminArea();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        addTextView.setText(address);
     }
 }

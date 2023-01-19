@@ -82,8 +82,8 @@
 
     <TextView
         android:id="@+id/addTextView"
-        android:layout_width="81dp"
-        android:layout_height="67dp"
+        android:layout_width="221dp"
+        android:layout_height="113dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Address:\nABC\nDEFG"
