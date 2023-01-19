@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         latTextView.setText("Latitude: " + Double.toString(location.getLatitude()));
         lonTextView.setText("Longitude: " + Double.toString(location.getLongitude()));
         accTextView.setText("Accuracy: " + Double.toString(location.getAccuracy()));
-        altTextView.setText("Altitude: " + Double.toString(location.getAltitude()));
 
         String address = "Could not find address..";
 
