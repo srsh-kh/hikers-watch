@@ -14,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(@NonNull Location location) {
-                Log.i("Location", location.toString());
+                updateLocationInfo(location);
             }
         };
 
@@ -59,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateLocationInfo(Location location) {
-        Log.i("Location", location.toString());
+        TextView latTextView = findViewById(R.id.latTexView);
+        TextView lonTextView = findViewById(R.id.lonTextView);
+        TextView accTextView = findViewById(R.id.accTextView);
+        TextView altTextView = findViewById(R.id.altTextView);
+        TextView addTextView = findViewById(R.id.addTextView);
     }
 }
